@@ -32,15 +32,17 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 def score(dice)
   # You need to write this method
 
-  h = Hash.new(0)
-  dice.each{ |die| h[die] += 1 }
+  how_many_rolled = Hash.new(0)
+  dice.each do |die|
+    how_many_rolled[die] += 1
+  end
 
   sum = 0
   sum5 = 0
   sum1 = 0
   sum0 = 0
 
-  case h[5]
+  case how_many_rolled[5]
     when 1 then sum5 = 50
     when 2 then sum5 = 100
     when 3 then sum5 = 500
@@ -48,7 +50,7 @@ def score(dice)
     when 5 then sum5 = 600
   end
 
-  case h[1]
+  case how_many_rolled[1]
     when 1 then sum1 = 100
     when 2 then sum1 = 200
     when 3 then sum1 = 1000
@@ -56,11 +58,11 @@ def score(dice)
     when 5 then sum1 = 1200
   end
 
-  case
-  when h[2] ==3 then sum0 = 200
-  when h[3] ==3 then sum0 = 300
-  when h[4] ==3 then sum0 = 400
-  when h[6] ==3 then sum0 = 600
+  case #all other rolls
+  when how_many_rolled[2] ==3 then sum0 = 200
+  when how_many_rolled[3] ==3 then sum0 = 300
+  when how_many_rolled[4] ==3 then sum0 = 400
+  when how_many_rolled[6] ==3 then sum0 = 600
   end
 sum = sum5 + sum1 + sum0
 return sum
